@@ -1,0 +1,15 @@
+export PYTHONPATH="${PYTHONPATH}:/opt/movidius/caffe/python"
+
+source /home/pi/openvino/inference_engine_vpu_arm/bin/setupvars.sh
+
+# virtualenv and virtualenvwrapper
+export WORKON_HOME=/home/pi/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
+
+workon openvino
+
+python openvino_real_time_object_detection.py \
+        --prototxt MobileNetSSD_deploy.prototxt \
+        --model MobileNetSSD_deploy.caffemodel \
+        --confidence 0.8
